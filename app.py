@@ -2,7 +2,6 @@ import pandas as pd
 from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
 
-# Load processed data
 df = pd.read_csv("processed_sales.csv")
 df["date"] = pd.to_datetime(df["date"])
 
@@ -19,6 +18,7 @@ app.layout = html.Div(
     children=[
         html.H1(
             "Pink Morsel Sales Visualiser",
+            id="app-header",
             style={
                 "textAlign": "center",
                 "color": "#2c3e50",
@@ -117,7 +117,6 @@ def update_chart(selected_region):
             title=f"Daily Pink Morsel Sales – {selected_region.capitalize()}",
         )
 
-        # Force colour consistency for single line
         fig.update_traces(line_color=REGION_COLORS[selected_region])
 
     fig.update_layout(
